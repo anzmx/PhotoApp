@@ -1,7 +1,6 @@
 package com.zeltixdev.photoapp.api
 
 import com.zeltixdev.photoapp.models.Photo
-import com.zeltixdev.photoapp.models.PhotoList
 import retrofit2.Response
 import javax.inject.Inject
 
