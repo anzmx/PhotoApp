@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -21,6 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class PhotoListFragment : Fragment() {
     private val photosViewModel: PhotoListViewModel by viewModels()
     private lateinit var recyclerView: RecyclerView
+    private lateinit var progressBar: ProgressBar
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -31,12 +33,19 @@ class PhotoListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = view.findViewById(R.id.rv)
+        progressBar = view.findViewById(R.id.progressBar)
         recyclerView.layoutManager = GridLayoutManager(requireContext(),2)
         photosViewModel.photos.observe(viewLifecycleOwner, {
             when(it.status){
-                Status.LOADING -> Log.d("Loading: ", "loading")
-                Status.ERROR -> Log.d("PhotoDeatailError: ", it.message!!)
-                Status.SUCCESS -> recyclerView.adapter = PhotoListAdapter(requireContext(),it.data!!)
+                Status.LOADING -> progressBar.visibility = View.VISIBLE
+                Status.ERROR -> {
+                    progressBar.visibility = View.INVISIBLE
+                    Log.d("PhotoDeatailError: ", it.message!!)
+                }
+                Status.SUCCESS -> {
+                    recyclerView.adapter = PhotoListAdapter(requireContext(),it.data!!)
+                    progressBar.visibility = View.INVISIBLE
+                }
             }
         })
        //replace navigation on image press

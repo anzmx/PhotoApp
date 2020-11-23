@@ -1,5 +1,6 @@
 package com.zeltixdev.photoapp.models
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -8,8 +9,9 @@ data class Photo(
     @PrimaryKey
     val id: String,
     val author: String,
-    val download_url: String?,
+    val download_url: String,
     val height: Int,
     val width: Int,
-    val url: String
+    val url: String,
+    @ColumnInfo(name = "isFavorite", defaultValue = "0") val isFavorite:Boolean
 )

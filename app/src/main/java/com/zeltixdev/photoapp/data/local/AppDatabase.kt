@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.zeltixdev.photoapp.data.local.daos.PhotoDao
 import com.zeltixdev.photoapp.models.Photo
 
-@Database(entities = [Photo::class], version = 2, exportSchema = false)
+@Database(entities = [Photo::class], version = 6, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun getPhotoDao(): PhotoDao
