@@ -6,15 +6,16 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.zeltixdev.photoapp.models.Photo
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PhotoDao {
 
     @Query("SELECT * FROM photos")
-    suspend fun getAllPhotos() : List<Photo>
+    fun getAllPhotos() : Flow<List<Photo>>
 
     @Query("SELECT * FROM photos WHERE id = :id")
-    suspend fun getPhoto(id: String): Photo
+    fun getPhoto(id: String): Flow<Photo>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(photos: List<Photo>)

@@ -9,11 +9,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.zeltixdev.photoapp.R
 import com.zeltixdev.photoapp.models.Photo
+import com.zeltixdev.photoapp.ui.PhotoListFragmentDirections
 
 class PhotoListAdapter(private val ctx: Context, val data:List<Photo>):RecyclerView.Adapter<PhotoViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {
@@ -39,10 +41,9 @@ class PhotoViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
     fun bindItems(photo:Photo){
         mAuthor?.text=photo.author
         Glide.with(itemView).load(photo.download_url).diskCacheStrategy(DiskCacheStrategy.ALL).fitCenter().centerCrop().into(mImageView!!)
-        itemView.setOnClickListener { v ->
-            val bundle = Bundle()
-            bundle.putString("photoId", photo.id)
-            Navigation.findNavController(itemView).navigate(R.id.action_FirstFragment_to_SecondFragment,bundle)
+        itemView.setOnClickListener {
+        val action = PhotoListFragmentDirections.actionListFragmentToDetailFragment(photo.id)
+            it.findNavController().navigate(action)
         }
     }
 }
