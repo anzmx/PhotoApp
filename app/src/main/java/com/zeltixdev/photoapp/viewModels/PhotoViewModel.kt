@@ -12,11 +12,11 @@ class PhotoViewModel @ViewModelInject constructor(
     private val photoRepository: PhotoRepository,
     @Assisted private val savedStateHandle: SavedStateHandle
 ): ViewModel(){
-    private val photoId: MutableLiveData<Int> =
-        savedStateHandle.getLiveData("photoId", 0)
-    private val _res = MutableLiveData<Resource<Photo>>()
+    private val photoId: MutableLiveData<String> =
+        savedStateHandle.getLiveData("photoId", "")
+    private val _res = MutableLiveData<Photo>()
 
-    val res : LiveData<Resource<Photo>>
+    val res : LiveData<Photo>
         get() = _res
 
     init {
@@ -24,14 +24,7 @@ class PhotoViewModel @ViewModelInject constructor(
     }
 
     private fun getPhotoDetails()  = viewModelScope.launch {
-        _res.postValue(Resource.loading(null))
-        photoRepository.getPhotoDetails(photoId.value!!).let {
-            if (it.isSuccessful){
-                _res.postValue(Resource.success(it.body()))
-            }else{
-                _res.postValue(Resource.error(it.errorBody().toString(), null))
-            }
-        }
+       _res.value = photoRepository.getPhotoDetails(photoId.value!!)
     }
 
 }

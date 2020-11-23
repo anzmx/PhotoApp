@@ -1,18 +1,19 @@
 package com.zeltixdev.photoapp.viewModels
 
+import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.zeltixdev.photoapp.models.PhotoList
+import com.zeltixdev.photoapp.models.Photo
 import com.zeltixdev.photoapp.repository.PhotoRepository
-import com.zeltixdev.photoapp.utilities.Resource
 import kotlinx.coroutines.launch
 
 class PhotoListViewModel @ViewModelInject constructor(
     private val photoRepository: PhotoRepository,
+    @Assisted private val savedStateHandle: SavedStateHandle
 ): ViewModel(){
-    private val _res = MutableLiveData<Resource<PhotoList>>()
+    private val _res = MutableLiveData<List<Photo>>()
 
-    val res : LiveData<Resource<PhotoList>>
+    val res : LiveData<List<Photo>>
         get() = _res
 
     init {
@@ -20,14 +21,6 @@ class PhotoListViewModel @ViewModelInject constructor(
     }
 
     private fun getPhotos()  = viewModelScope.launch {
-        _res.postValue(Resource.loading(null))
-        photoRepository.getPhotos().let {
-            if (it.isSuccessful){
-                _res.postValue(Resource.success(it.body()))
-            }else{
-                _res.postValue(Resource.error(it.errorBody().toString(), null))
-            }
+            _res.value = photoRepository.getPhotos()
         }
     }
-
-}

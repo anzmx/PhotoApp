@@ -8,6 +8,6 @@ import javax.inject.Inject
 class ApiHelperImpl @Inject constructor(
     private val apiService: ApiService
 ):ApiHelper{
-    override suspend fun getPhotos(): Response<PhotoList> = apiService.getPhotos()
-    override suspend fun getPhotoDetails(photoId: Int): Response<Photo> = apiService.getPhotoDetail(photoId)
+    override suspend fun getPhotos(): Response<List<Photo>> = apiService.getPhotos()
+    override suspend fun getPhotoDetails(photoId: String): Response<Photo> = apiService.getPhotoDetail(photoId)
 }

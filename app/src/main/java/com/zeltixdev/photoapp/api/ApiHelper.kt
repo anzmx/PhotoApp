@@ -5,6 +5,6 @@ import com.zeltixdev.photoapp.models.PhotoList
 import retrofit2.Response
 
 interface ApiHelper {
-    suspend fun getPhotos():Response<PhotoList>
-    suspend fun getPhotoDetails(photoId:Int):Response<Photo>
+    suspend fun getPhotos():Response<List<Photo>>
+    suspend fun getPhotoDetails(photoId:String):Response<Photo>
 }

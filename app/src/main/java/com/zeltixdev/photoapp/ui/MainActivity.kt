@@ -3,6 +3,7 @@ package com.zeltixdev.photoapp.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.zeltixdev.photoapp.R
+import com.zeltixdev.photoapp.viewModels.PhotoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

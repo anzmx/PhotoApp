@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/ListFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.zeltixdev.photoapp.ui.FirstFragment"
-        android:label="@string/first_fragment_label"
+        android:id="@+id/ListFragment"
+        android:name="com.zeltixdev.photoapp.ui.PhotoListFragment"
+        android:label="@string/list_fragment_label"
         tools:layout="@layout/fragment_list">
 
         <action
@@ -17,12 +17,16 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.zeltixdev.photoapp.ui.SecondFragment"
-        android:label="@string/second_fragment_label"
+        android:name="com.zeltixdev.photoapp.ui.PhotoDetailsFragment"
+        android:label="@string/detail_fragment_label"
         tools:layout="@layout/fragment_detail">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            app:destination="@id/ListFragment" />
+        <argument
+            android:name="photoId"
+            app:argType="string"
+            android:defaultValue="0" />
     </fragment>
 </navigation>

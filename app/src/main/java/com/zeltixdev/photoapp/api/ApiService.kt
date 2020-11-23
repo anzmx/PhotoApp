@@ -7,9 +7,9 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface ApiService {
-    @GET("list")
-    suspend fun getPhotos():Response<PhotoList>
+    @GET("v2/list")
+    suspend fun getPhotos():Response<List<Photo>>
 
     @GET("id/{id}/info")
-    suspend fun getPhotoDetail(@Path("id") photoId:Int):Response<Photo>
+    suspend fun getPhotoDetail(@Path("id") photoId:String):Response<Photo>
 }
