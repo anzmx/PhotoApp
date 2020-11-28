@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.zeltixdev.photoapp.R
 import com.zeltixdev.photoapp.adapters.PhotoListAdapter
 import com.zeltixdev.photoapp.utilities.Status
@@ -30,20 +30,27 @@ class PhotoListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val photoListAdapter = PhotoListAdapter { photo ->
+            val action = PhotoListFragmentDirections.actionListFragmentToDetailFragment(photo.id)
+            findNavController().navigate(action)
+        }
         progressBar = view.findViewById(R.id.progressBar)
         rv.layoutManager = GridLayoutManager(requireContext(),2)
+        rv.adapter = photoListAdapter
         photosViewModel.photos.observe(viewLifecycleOwner, {
             when(it.status){
                 Status.LOADING -> progressBar.visibility = View.VISIBLE
                 Status.ERROR -> {
                     progressBar.visibility = View.INVISIBLE
-                    Log.d("PhotoDeatailError: ", it.message!!)
+                    Log.d("PhotoDetailError: ", it.message!!)
                 }
                 Status.SUCCESS -> {
-                    rv.adapter = PhotoListAdapter(requireContext(),it.data!!)
+                    photoListAdapter.data = it.data!!
                     progressBar.visibility = View.INVISIBLE
                 }
             }
         })
     }
+
 }

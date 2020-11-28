@@ -36,7 +36,7 @@ class PhotoDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        photoViewModel.photo.observe(viewLifecycleOwner, Observer { photo:Photo -> detail_tvAuthor.text = photo.author
+        photoViewModel.photo.observe(viewLifecycleOwner, { photo:Photo -> detail_tvAuthor.text = photo.author
         Glide.with(requireContext()).load(photo.download_url).diskCacheStrategy(DiskCacheStrategy.ALL).fitCenter().into(detail_imageView)})
     }
 }

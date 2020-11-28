@@ -1,9 +1,9 @@
 package com.zeltixdev.photoapp.di
 
 import com.zeltixdev.photoapp.BuildConfig
-import com.zeltixdev.photoapp.api.ApiHelper
-import com.zeltixdev.photoapp.api.ApiHelperImpl
-import com.zeltixdev.photoapp.api.ApiService
+import com.zeltixdev.photoapp.data.remote.ApiHelper
+import com.zeltixdev.photoapp.data.remote.ApiHelperImpl
+import com.zeltixdev.photoapp.data.remote.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

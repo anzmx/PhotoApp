@@ -1,4 +1,4 @@
-package com.zeltixdev.photoapp.api
+package com.zeltixdev.photoapp.data.remote
 
 import com.zeltixdev.photoapp.models.Photo
 import retrofit2.Response
