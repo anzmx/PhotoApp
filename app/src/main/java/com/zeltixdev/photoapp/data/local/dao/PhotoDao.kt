@@ -1,7 +1,7 @@
-package com.zeltixdev.photoapp.data.local.daos
+package com.zeltixdev.photoapp.data.local.dao
 
 import androidx.room.*
-import com.zeltixdev.photoapp.models.Photo
+import com.zeltixdev.photoapp.entity.Photo
 import kotlinx.coroutines.flow.Flow
 
 @Dao

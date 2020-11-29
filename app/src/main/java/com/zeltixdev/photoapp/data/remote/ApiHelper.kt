@@ -1,6 +1,6 @@
 package com.zeltixdev.photoapp.data.remote
 
-import com.zeltixdev.photoapp.models.Photo
+import com.zeltixdev.photoapp.entity.Photo
 import retrofit2.Response
 
 interface ApiHelper {

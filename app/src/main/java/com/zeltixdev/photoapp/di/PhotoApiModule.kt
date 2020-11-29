@@ -4,6 +4,8 @@ import com.zeltixdev.photoapp.BuildConfig
 import com.zeltixdev.photoapp.data.remote.ApiHelper
 import com.zeltixdev.photoapp.data.remote.ApiHelperImpl
 import com.zeltixdev.photoapp.data.remote.ApiService
+import com.zeltixdev.photoapp.repository.PhotoRepository
+import com.zeltixdev.photoapp.repository.impl.PhotoRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,29 +16,30 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
+private const val BASE_URL = "https://picsum.photos/"
+
 @Module
 @InstallIn(ApplicationComponent::class)
 object PhotoApiModule {
 
     @Singleton
     @Provides
-    fun provideHttpClient() = if (BuildConfig.DEBUG){
-        val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-        OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
-            .build()
-    }else{
-        OkHttpClient
-            .Builder()
-            .build()
+    fun provideHttpClient(): OkHttpClient {
+        val builder = OkHttpClient.Builder()
+        if (BuildConfig.DEBUG) {
+            val loggingInterceptor = HttpLoggingInterceptor().apply {
+                setLevel(HttpLoggingInterceptor.Level.BODY)
+            }
+            builder.addInterceptor(loggingInterceptor)
+        }
+        return builder.build()
     }
 
     @Singleton
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient) : Retrofit = Retrofit.Builder()
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl("https://picsum.photos/")
+        .baseUrl(BASE_URL)
         .client(okHttpClient)
         .build()
 

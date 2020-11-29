@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/ListFragment"
-        android:name="com.zeltixdev.photoapp.ui.PhotoListFragment"
+        android:name="com.zeltixdev.photoapp.ui.photo.list.PhotoListFragment"
         android:label="@string/list_fragment_label"
-        tools:layout="@layout/fragment_list">
+        tools:layout="@layout/fragment_photo_list">
 
         <action
             android:id="@+id/action_ListFragment_to_DetailFragment"
@@ -17,9 +17,9 @@
     </fragment>
     <fragment
         android:id="@+id/DetailFragment"
-        android:name="com.zeltixdev.photoapp.ui.PhotoDetailsFragment"
+        android:name="com.zeltixdev.photoapp.ui.photo.detail.PhotoDetailsFragment"
         android:label="@string/detail_fragment_label"
-        tools:layout="@layout/fragment_detail">
+        tools:layout="@layout/fragment_photo_detail">
 
         <action
             android:id="@+id/action_DetailFragment_to_ListFragment"

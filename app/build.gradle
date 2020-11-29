@@ -37,6 +37,9 @@ android {
     hilt {
         enableTransformForLocalTests = true
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {

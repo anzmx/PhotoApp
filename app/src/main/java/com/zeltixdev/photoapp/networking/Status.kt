@@ -1,4 +1,4 @@
-package com.zeltixdev.photoapp.utilities
+package com.zeltixdev.photoapp.networking
 
 enum class Status {
     SUCCESS,

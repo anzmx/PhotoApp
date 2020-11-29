@@ -19,5 +19,4 @@ object PhotoDatabaseModule {
     @Singleton
     @Provides
     fun providePhotoDao(database: AppDatabase) = database.getPhotoDao()
-
 }

@@ -3,20 +3,22 @@ package com.zeltixdev.photoapp.viewModels
 import androidx.lifecycle.*
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
-import com.zeltixdev.photoapp.models.Photo
 import com.zeltixdev.photoapp.repository.PhotoRepository
-import com.zeltixdev.photoapp.utilities.Resource
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 data class PhotoInitParams(val photoId: String)
-class PhotoViewModel @AssistedInject constructor(
+
+class PhotoDetailViewModel @AssistedInject constructor(
     private val photoRepository: PhotoRepository,
     @Assisted private val initParams: PhotoInitParams
 ): ViewModel(){
-    private val _photoLiveData = MutableLiveData<Photo>()
-    val photo: LiveData<Photo>
-    get() = _photoLiveData
+
+    private val _displayPhoto = MutableLiveData<String>()
+    val displayPhoto: LiveData<String> get() = _displayPhoto
+
+    private val _displayAuthorName = MutableLiveData<String>()
+    val displayAuthorName: LiveData<String> get() = _displayAuthorName
 
     init {
         getPhoto(initParams.photoId)
@@ -25,14 +27,15 @@ class PhotoViewModel @AssistedInject constructor(
     private fun getPhoto(photoId: String){
         viewModelScope.launch {
             photoRepository.getPhotoDetails(photoId).collect {
-                _photoLiveData.value = it
+                _displayPhoto.value = it.download_url
+                _displayAuthorName.value = it.author
             }
         }
     }
 
     @AssistedInject.Factory
     interface AssistedFactory {
-        fun create(initParams: PhotoInitParams): PhotoViewModel
+        fun create(initParams: PhotoInitParams): PhotoDetailViewModel
     }
 
     companion object {
