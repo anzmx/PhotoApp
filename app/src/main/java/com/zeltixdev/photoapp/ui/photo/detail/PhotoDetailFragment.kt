@@ -16,9 +16,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class PhotoDetailsFragment : Fragment() {
+class PhotoDetailFragment : Fragment() {
 
-    private val args: PhotoDetailsFragmentArgs by navArgs()
+    private val args: PhotoDetailFragmentArgs by navArgs()
 
     @Inject
     lateinit var photoDetailViewModelAssistedFactory: PhotoDetailViewModel.AssistedFactory

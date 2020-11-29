@@ -1,7 +1,6 @@
 package com.zeltixdev.photoapp.ui.photo.list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,10 +50,9 @@ class PhotoListFragment : Fragment() {
     private fun initViewModelCallbacks() {
         photosViewModel.displayPhotoList.observe(viewLifecycleOwner, {
             when (it.status) {
-                Status.LOADING -> binding.progressBar.visibility = View.VISIBLE //TODO Please confirm if Status.LOADING is being used by someone
+                Status.LOADING -> binding.progressBar.visibility = View.VISIBLE
                 Status.ERROR -> {
                     binding.progressBar.visibility = View.INVISIBLE
-                    Log.d("PhotoDetailError: ", it.message!!)
                 }
                 Status.SUCCESS -> {
                     photoListAdapter.items = it.data!!

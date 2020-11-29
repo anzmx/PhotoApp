@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/DetailFragment"
-        android:name="com.zeltixdev.photoapp.ui.photo.detail.PhotoDetailsFragment"
+        android:name="com.zeltixdev.photoapp.ui.photo.detail.PhotoDetailFragment"
         android:label="@string/detail_fragment_label"
         tools:layout="@layout/fragment_photo_detail">
 

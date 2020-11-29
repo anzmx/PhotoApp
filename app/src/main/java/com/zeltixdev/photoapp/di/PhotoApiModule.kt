@@ -4,8 +4,6 @@ import com.zeltixdev.photoapp.BuildConfig
 import com.zeltixdev.photoapp.data.remote.ApiHelper
 import com.zeltixdev.photoapp.data.remote.ApiHelperImpl
 import com.zeltixdev.photoapp.data.remote.ApiService
-import com.zeltixdev.photoapp.repository.PhotoRepository
-import com.zeltixdev.photoapp.repository.impl.PhotoRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -45,7 +43,7 @@ object PhotoApiModule {
 
     @Singleton
     @Provides
-    fun provideApiService(retrofit: Retrofit) = retrofit.create(ApiService::class.java)
+    fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
 
     @Singleton
     @Provides
